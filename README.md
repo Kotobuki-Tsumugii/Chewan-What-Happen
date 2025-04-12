@@ -5,8 +5,6 @@
  快速开始
 1. 下载Godot引擎 v4.4.1
 2. 克隆项目：
-   bash
-   git clone https://github.com/Kotobuki-tsumugii/车万水夜秒.git
 3. 打开Godot导入项目
 
 
