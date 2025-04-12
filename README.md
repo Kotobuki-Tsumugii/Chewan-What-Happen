@@ -4,7 +4,7 @@
 
  快速开始
 1. 下载Godot引擎 v4.4.1
-2. 克隆项目：
+2. 克隆项目：gh repo clone Kotobuki-Tsumugii/Chewan-What-Happen
 3. 打开Godot导入项目
 
 
