@@ -1,15 +1,44 @@
-# Godot 4+ specific ignores
-.godot/
-
-# Godot-specific ignores
-.import/
+# ========== Godot 默认规则 ==========
+*.import/
 export.cfg
-export_credentials.cfg
-
-# Imported translations (automatically generated from CSV files)
-*.translation
-
-# Mono-specific ignores
+export_presets.cfg
+.godot/
 .mono/
-data_*/
-mono_crash.*.json
+data/
+*.log
+
+# ========== 通用 C++ 规则 ==========
+# 编译产物
+*.obj
+*.pdb
+*.ilk
+*.exe
+*.dll
+*.lib
+*.exp
+*.sln
+*.vcxproj*
+*.filters
+build/
+bin/
+Debug/
+Release/
+
+# ========== MSVC 2019 特定规则 ==========
+# MSVC 临时文件和缓存
+.vs/             # VS 2017/2019 的工作区配置
+ipch/            # IntelliSense 预编译头缓存
+*.aps
+*.ncb
+*.suo
+*.user
+*.tlog
+*.lastbuildstate
+*.idb
+*.ilk
+*.pch
+*.sdf
+
+# ========== 其他通用规则 ==========
+.DS_Store
+Thumbs.db
