@@ -1,12 +1,116 @@
---
-
-
-
-
-
-
-
-
-
-如你所见，地球
-    🌎
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>地球</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #010614;
+            color: white;
+            font-family: 'Segoe UI', system-ui;
+            text-align: center;
+            overflow: hidden;
+            padding: 20px;
+        }
+        
+        .header {
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+            font-weight: 400;
+        }
+        
+        .earth-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 80vmin;
+            height: 80vmin;
+            max-width: 600px;
+            max-height: 600px;
+            min-width: 300px;
+            min-height: 300px;
+        }
+        
+        .earth {
+            font-size: min(70vw, 550px);
+            line-height: 1;
+            text-align: center;
+        }
+        
+       
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .star {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>如你所见，这是地球</h1>
+    </div>
+    
+    <div class="earth-container">
+        <div class="earth">🌎</div>
+    </div>
+    
+    <div class="stars" id="stars"></div>
+    
+    <script>
+        // 创建简单的静态星空背景
+        function createStars() {
+            const stars = document.getElementById('stars');
+            const count = 100;
+            
+            for (let i = 0; i < count; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                
+                // 随机位置
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                
+                // 随机大小 (0.5px 到 2px)
+                const size = 0.5 + Math.random() * 1.5;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                
+                // 随机透明度
+                star.style.opacity = 0.3 + Math.random() * 0.4;
+                
+                stars.appendChild(star);
+            }
+        }
+        
+        // 页面加载完成后创建星星
+        window.addEventListener('DOMContentLoaded', createStars);
+    </script>
+</body>
+</html>
