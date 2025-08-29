@@ -74,17 +74,18 @@
 </head>
 <body>
     <div class="header">
-        <h1>如你所见，这是地球</h1>
+        <h1>如你所见，这是张明扬同学
+由于某种原因
+他停止了思考</h1>
     </div>
     
     <div class="earth-container">
-        <div class="earth">🌎</div>
+        <div class="earth">😫</div>
     </div>
     
     <div class="stars" id="stars"></div>
     
     <script>
-        // 创建简单的静态星空背景
         function createStars() {
             const stars = document.getElementById('stars');
             const count = 100;
@@ -93,23 +94,23 @@
                 const star = document.createElement('div');
                 star.classList.add('star');
                 
-                // 随机位置
+                
                 star.style.left = `${Math.random() * 100}%`;
                 star.style.top = `${Math.random() * 100}%`;
                 
-                // 随机大小 (0.5px 到 2px)
+               
                 const size = 0.5 + Math.random() * 1.5;
                 star.style.width = `${size}px`;
                 star.style.height = `${size}px`;
                 
-                // 随机透明度
+                
                 star.style.opacity = 0.3 + Math.random() * 0.4;
                 
                 stars.appendChild(star);
             }
         }
         
-        // 页面加载完成后创建星星
+    
         window.addEventListener('DOMContentLoaded', createStars);
     </script>
 </body>
