@@ -2,114 +2,321 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZMYonly</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>sis=king</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap');
         
         body {
+            margin: 0;
+            padding: 20px;
+            background-color: white;
+            color: #333;
+            font-family: 'Ma Shan Zheng', cursive;
+            text-align: center;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            background: #010614;
-            color: white;
-            font-family: 'Segoe UI', system-ui;
-            text-align: center;
+            height: 100vh;
+            box-sizing: border-box;
+            position: relative;
             overflow: hidden;
-            padding: 20px;
+            touch-action: manipulation;
         }
-        
-        .header {
-            margin-bottom: 30px;
-        }
-        
-        h1 {
-            font-size: clamp(2rem, 6vw, 3.5rem);
-            margin-bottom: 10px;
-            letter-spacing: 1px;
+
+        .birthday-text {
+            font-size: 36px;
+            margin: 0 0 40px;
             font-weight: 400;
+            line-height: 1.4;
+            color: #2c3e50;
+            letter-spacing: 1px;
         }
-        
-        .earth-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 80vmin;
-            height: 80vmin;
-            max-width: 600px;
-            max-height: 600px;
-            min-width: 300px;
-            min-height: 300px;
+
+        .cake-btn {
+            font-size: 80px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            outline: none;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+            transition: all 0.3s ease;
+            margin-top: 30px;
+            padding: 0;
         }
-        
-        .earth {
-            font-size: min(35vw, 250px);
-            line-height: 1;
-            text-align: center;
+
+        .cake-btn:active {
+            transform: scale(0.95);
         }
-        
-       
-        .stars {
+
+        .black-screen {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none;
-            z-index: -1;
+            background-color: black;
+            z-index: 10;
+            display: none;
+            overflow: hidden;
+            opacity: 0;
+            transition: opacity 2s ease;
         }
-        
+
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 11;
+            opacity: 0;
+            transition: opacity 3s ease;
+        }
+
         .star {
             position: absolute;
-            background-color: rgba(255, 255, 255, 0.7);
+            background-color: white;
             border-radius: 50%;
+            animation: twinkle 4s infinite alternate;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.1; transform: scale(0.8); }
+            50% { opacity: 0.7; transform: scale(1.1); }
+            100% { opacity: 0.3; transform: scale(0.9); }
+        }
+
+        .message-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 12;
+            color: white;
+            padding: 20px;
+            box-sizing: border-box;
+            opacity: 0;
+            transition: opacity 3s ease;
+        }
+
+        .message-line {
+            width: 100%;
+            text-align: center;
+            margin: 18px 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 1.2s ease;
+            font-size: 24px;
+            line-height: 1.8;
+            font-weight: 400;
+            font-family: 'Ma Shan Zheng', cursive;
+            letter-spacing: 0.5px;
+        }
+
+        .rose-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 80px;
+            height: 80px;
+            z-index: 13;
+            opacity: 0;
+            transition: opacity 2s;
+        }
+
+        .rose-canvas {
+            width: 100%;
+            height: 100%;
+        }
+
+        @media (max-width: 480px) {
+            .birthday-text {
+                font-size: 28px;
+            }
+            
+            .message-line {
+                font-size: 20px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .birthday-text {
+                font-size: 24px;
+            }
+            
+            .message-line {
+                font-size: 18px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>如你所见 这是张明扬同学 由于某种原因 他停止了思考</h1>
+    <div class="birthday-text">老姐，生日快乐(　ﾟ∀ﾟ) ﾉ♡</div>
+    <button class="cake-btn" id="cakeBtn">🎂</button>
+
+    <div class="black-screen" id="blackScreen">
+        <div class="stars" id="stars"></div>
+        <div class="message-container" id="messageContainer">
+            <div class="message-line">亲爱的姐姐：</div>
+            <div class="message-line">恭喜您成功升级到最新版本^ω^</div>
+            <div class="message-line">祝来岁尽意，从容地三十而立</div>
+            <div class="message-line">不过</div>
+            <div class="message-line">管他几岁 开心万岁</div>
+            <div class="message-line">“祝全世界最好的姐姐生日快乐੭ ᐕ)੭</div>
+        </div>
+        <div class="rose-container" id="roseContainer">
+            <canvas class="rose-canvas" id="roseCanvas"></canvas>
+        </div>
     </div>
-    
-    <div class="earth-container">
-        <div class="earth">😫</div>
-    </div>
-    
-    <div class="stars" id="stars"></div>
-    
+
     <script>
+        document.getElementById('cakeBtn').addEventListener('click', function() {
+            const blackScreen = document.getElementById('blackScreen');
+            const stars = document.getElementById('stars');
+            const messageContainer = document.getElementById('messageContainer');
+            const messageLines = document.querySelectorAll('.message-line');
+            const roseContainer = document.getElementById('roseContainer');
+            
+            // 显示黑屏并淡入
+            blackScreen.style.display = 'block';
+            setTimeout(() => {
+                blackScreen.style.opacity = '1';
+                
+                // 黑屏完全显示后创建星星
+                setTimeout(() => {
+                    createStars();
+                    
+                    // 星星淡入效果
+                    setTimeout(() => {
+                        stars.style.opacity = '1';
+                        
+                        // 星星完全显示后开始显示文字
+                        setTimeout(() => {
+                            messageContainer.style.opacity = '1';
+                            
+                            // 逐行显示消息
+                            messageLines.forEach((line, index) => {
+                                setTimeout(() => {
+                                    line.style.opacity = '1';
+                                    line.style.transform = 'translateY(0)';
+                                    
+                                    // 最后一行显示后绘制玫瑰
+                                    if(index === messageLines.length - 1) {
+                                        setTimeout(() => {
+                                            roseContainer.style.opacity = '1';
+                                            drawRose();
+                                        }, 1500);
+                                    }
+                                }, index * 1500);
+                            });
+                        }, 3000);
+                    }, 100);
+                }, 2000);
+            }, 10);
+        });
+
         function createStars() {
             const stars = document.getElementById('stars');
-            const count = 100;
+            const starCount = 500;
+            const width = window.innerWidth;
+            const height = window.innerHeight;
             
-            for (let i = 0; i < count; i++) {
+            stars.innerHTML = '';
+            
+            for (let i = 0; i < starCount; i++) {
                 const star = document.createElement('div');
-                star.classList.add('star');
+                star.className = 'star';
                 
-                
-                star.style.left = `${Math.random() * 100}%`;
-                star.style.top = `${Math.random() * 100}%`;
-                
-               
-                const size = 0.5 + Math.random() * 1.5;
+                const size = Math.random() * 1.0 + 0.2;
                 star.style.width = `${size}px`;
                 star.style.height = `${size}px`;
                 
+                star.style.left = `${Math.random() * width}px`;
+                star.style.top = `${Math.random() * height}px`;
                 
-                star.style.opacity = 0.3 + Math.random() * 0.4;
+                star.style.animationDelay = `${Math.random() * 5}s`;
+                star.style.animationDuration = `${Math.random() * 3 + 3}s`;
+                
+                star.style.zIndex = Math.floor(Math.random() * 5) + 10;
                 
                 stars.appendChild(star);
             }
         }
-        
-    
-        window.addEventListener('DOMContentLoaded', createStars);
+
+        function drawRose() {
+            const canvas = document.getElementById('roseCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            // 设置画布大小
+            canvas.width = 80;
+            canvas.height = 80;
+            
+            // 玫瑰函数参数 k=5/4
+            const k = 5/4;
+            const radius = 30;
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            
+            // 绘制玫瑰曲线（白色线条，不填充）
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.9)';
+            ctx.lineWidth = 1.5;
+            ctx.beginPath();
+            
+            for (let theta = 0; theta < Math.PI * 8; theta += 0.01) {
+                const r = radius * Math.cos(k * theta);
+                const x = centerX + r * Math.cos(theta);
+                const y = centerY + r * Math.sin(theta);
+                
+                if (theta === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+            }
+            
+            ctx.stroke();
+            
+            // 添加动画效果
+            let angle = 0;
+            function animateRose() {
+                ctx.save();
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.translate(centerX, centerY);
+                ctx.rotate(angle * Math.PI / 180);
+                ctx.translate(-centerX, -centerY);
+                
+                // 重新绘制玫瑰
+                ctx.beginPath();
+                for (let theta = 0; theta < Math.PI * 8; theta += 0.01) {
+                    const r = radius * Math.cos(k * theta);
+                    const x = centerX + r * Math.cos(theta);
+                    const y = centerY + r * Math.sin(theta);
+                    
+                    if (theta === 0) {
+                        ctx.moveTo(x, y);
+                    } else {
+                        ctx.lineTo(x, y);
+                    }
+                }
+                ctx.stroke();
+                ctx.restore();
+                
+                angle += 0.3;
+                if (angle >= 360) angle = 0;
+                
+                requestAnimationFrame(animateRose);
+            }
+            
+            animateRose();
+        }
     </script>
 </body>
 </html>
